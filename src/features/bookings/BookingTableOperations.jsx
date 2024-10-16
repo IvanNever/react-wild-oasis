@@ -1,4 +1,4 @@
-import SortBy from "../../ui/SortBy";
+import SortBy from "../../ui/SortBy.jsx";
 import Filter from "../../ui/Filter.jsx";
 import TableOperations from "../../ui/TableOperations.jsx";
 
