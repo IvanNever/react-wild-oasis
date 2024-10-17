@@ -13,12 +13,13 @@ import Account from "./pages/Account.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import AppLayout from "./ui/AppLayout.jsx";
 import Booking from "./pages/Booking.jsx";
+import Checkin from "./pages/Checkin.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
-      gcTime: 0,
+      staleTime: 6 * 1000,
+      gcTime: 6 * 1000,
     },
   },
 });
@@ -36,10 +37,10 @@ export default function App() {
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />
               <Route path="bookings/:bookingId" element={<Booking />} />
+              <Route path="check-in/:bookingId" element={<Checkin />} />
               <Route path="cabins" element={<Cabins />} />
               <Route path="settings" element={<Settings />} />
               <Route path="users" element={<Users />} />
-              <Route path="check-in/:id" element={<Account />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
