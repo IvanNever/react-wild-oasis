@@ -14,6 +14,7 @@ import AppLayout from "./ui/AppLayout.jsx";
 import Booking from "./pages/Booking.jsx";
 import Checkin from "./pages/Checkin.jsx";
 import ProtectedRoute from "./ui/ProtectedRoute.jsx";
+import Account from "./pages/Account.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,7 @@ export default function App() {
               <Route path="cabins" element={<Cabins />} />
               <Route path="settings" element={<Settings />} />
               <Route path="users" element={<Users />} />
+              <Route path="account" element={<Account />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
