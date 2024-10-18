@@ -9,17 +9,17 @@ import Cabins from "./pages/Cabins.jsx";
 import Settings from "./pages/Settings.jsx";
 import Users from "./pages/Users.jsx";
 import Login from "./pages/Login.jsx";
-import Account from "./pages/Account.jsx";
 import PageNotFound from "./pages/PageNotFound.jsx";
 import AppLayout from "./ui/AppLayout.jsx";
 import Booking from "./pages/Booking.jsx";
 import Checkin from "./pages/Checkin.jsx";
+import ProtectedRoute from "./ui/ProtectedRoute.jsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 6 * 1000,
-      gcTime: 6 * 1000,
+      staleTime: 6000,
+      gcTime: 6000,
     },
   },
 });
@@ -32,7 +32,13 @@ export default function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />
