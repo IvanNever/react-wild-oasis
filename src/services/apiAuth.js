@@ -1,5 +1,36 @@
 import supabase from "./supabase.js";
 
+export async function signup({ fullName, email, password }) {
+  const { data: savedSessionData } = await supabase.auth.getSession();
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: { data: { fullName, avatar: "" } },
+  });
+
+  let authError = null;
+
+  if (data?.user && !data.user?.identities.length) {
+    authError = {
+      name: "AuthApiError",
+      message: "This email has already been registered",
+    };
+  } else if (error) {
+    authError = {
+      name: error.name,
+      message: error.message,
+    };
+  }
+
+  if (authError) throw new Error(authError.message);
+
+  if (savedSessionData) {
+    await supabase.auth.setSession(savedSessionData.session);
+  }
+
+  return data;
+}
+
 export async function login({ email, password }) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
